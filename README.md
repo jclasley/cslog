@@ -34,15 +34,15 @@ func main() {
 }
 
 func getFromDB(ctx context.Context, userID string) int {
-    ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
-    defer cancel()
+    	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
+    	defer cancel()
 
-    ctx = cslog.WithAttrs(ctx, slog.String("userID", userID))
+    	ctx = cslog.WithAttrs(ctx, slog.String("userID", userID))
 
-    // call DB
-    const fakeResult = 42
-    cslog.Debug(ctx, "got from DB", slog.Int("result", 42))
-    return fakeResult
+    	// call DB
+    	const fakeResult = 42
+    	cslog.Debug(ctx, "got from DB", slog.Int("result", 42))
+    	return fakeResult
 }
 ```
 
