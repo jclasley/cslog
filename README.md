@@ -13,7 +13,7 @@ import (
 	"os"
 	"time"
 
-    "github.com/jclasley/cslog"
+    	"github.com/jclasley/cslog"
 )
 
 func main() {
