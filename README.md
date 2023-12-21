@@ -30,7 +30,7 @@ func main() {
 	got := getFromDB(cslog.WithGroup(ctx, "getFromDB"), "1234567890")
 	if want := 43; got != want {
 		cslog.Error(ctx, "wrong result!", slog.Int("wanted", want), slog.Int("got", got))
-        // {"level":"ERROR","msg":"wrong result!","year":2023,"wanted":43,"got":42} 
+        	// {"level":"ERROR","msg":"wrong result!","year":2023,"wanted":43,"got":42} 
 	}
 }
 
