@@ -23,13 +23,14 @@ func main() {
 
 	ctx := cslog.FromBackground(slog.New(slog.NewJSONHandler(os.Stdout, cslog.WithoutTime(opt))))
 
-	cslog.Info(ctx, "hello!")
+	cslog.Info(ctx, "hello!") // {"level":"INFO","msg":"hello!"}
 	y, _, _ := time.Now().Local().Date()
 	ctx = cslog.WithAttrs(ctx, slog.Int("year", y))
 
 	got := getFromDB(cslog.WithGroup(ctx, "getFromDB"), "1234567890")
 	if want := 43; got != want {
 		cslog.Error(ctx, "wrong result!", slog.Int("wanted", want), slog.Int("got", got))
+        // {"level":"ERROR","msg":"wrong result!","year":2023,"wanted":43,"got":42} 
 	}
 }
 
@@ -42,6 +43,7 @@ func getFromDB(ctx context.Context, userID string) int {
     	// call DB
     	const fakeResult = 42
     	cslog.Debug(ctx, "got from DB", slog.Int("result", 42))
+        // {"level":"DEBUG","msg":"got from DB","year":2023,"getFromDB":{"userID":"foobar!!!","result":42}}
     	return fakeResult
 }
 ```
