@@ -13,7 +13,7 @@ func FromBackground(slog *slog.Logger) context.Context {
 	return FromContext(context.Background(), slog)
 }
 
-func logger(ctx context.Context) *slog.Logger {
+func Logger(ctx context.Context) *slog.Logger {
 	l, ok := ctx.Value(slogKey).(*slog.Logger)
 	if !ok || l == nil {
 		return slog.Default()
@@ -32,7 +32,7 @@ func WithAttrs(ctx context.Context, attr ...slog.Attr) context.Context {
 }
 
 func WithGroup(ctx context.Context, g string) context.Context {
-	l := logger(ctx)
+	l := Logger(ctx)
 	l = l.WithGroup(g)
 	return FromContext(ctx, l)
 }
@@ -58,7 +58,7 @@ func Error(ctx context.Context, msg string, args ...slog.Attr) {
 }
 
 func buildLogger(ctx context.Context, args ...slog.Attr) *slog.Logger {
-	l := logger(ctx)
+	l := Logger(ctx)
 	for _, arg := range args {
 		l = l.With(arg)
 	}
